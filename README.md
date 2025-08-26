@@ -1,102 +1,100 @@
 # VulkAnalyzer
 
-## Aviso Importante:
-O script é voltado para testes autorizados em ambientes controlados.
-Este script é para uso educacional e em sistemas com permissão explícita. Varredura não autorizada pode violar leis como o Código Penal Brasileiro (art. 154-A), LGPD, ou regulamentos internacionais.
-nem useK
+Autor Hygark 
 
-## Funcionalidades:
+## Funcionalidades
 
-Varredura de Portas: Escaneia portas TCP/UDP em múltiplos alvos com socket e scapy.
-Testes Web: Verifica SQL Injection, XSS, CSRF e SSRF com payloads avançados e integração com sqlmap.
-Análise de Cabeçalhos: Detecta ausência de cabeçalhos de segurança (ex.: Content-Security-Policy, HSTS).
-Detecção de CMS: Identifica CMS como WordPress, Joomla, Drupal via padrões HTML.
-Fingerprinting de SO: Estima sistemas operacionais com base em TTL via scapy.
-Suporte a Múltiplos Alvos: Varre intervalos de IPs e URLs em paralelo com threading.
-Relatórios: Exporta resultados em JSON e PDF com reportlab.
-GUI Interativa: Interface Tkinter com configuração, visualização de resultados e gráficos via matplotlib.
-Logging Avançado: Registra detalhes em arquivo (logs/vulnerability_analyzer.log) e webhook (ex.: Discord).
-Segurança: Timeout configurável, tratamento de erros robusto e threading otimizado (máximo 200 threads).
+Varredura de Portas: Escaneia portas TCP/UDP em um intervalo configurável com suporte a múltiplas threads.
+Testes Web: Verifica vulnerabilidades como SQL Injection, XSS, CSRF, SSRF, LFI/RFI.
+Detecção de CMS: Identifica sistemas como WordPress, Joomla e Drupal.
+Fingerprinting de SO: Estima o sistema operacional com base no TTL.
+Varredura de Subdomínios: Descobre subdomínios via DNS.
+Testes de APIs: Suporta varreduras em APIs REST, GraphQL e WebSockets, incluindo autenticação fraca e injeções.
+Cloud Misconfigurations: Verifica buckets públicos (AWS S3, Azure Blob, Google Cloud Storage).
+Integrações: Suporta XSStrike, Nikto, Burp Suite, Wfuzz, OWASP ZAP, Metasploit e Nuclei.
+Exportação de Relatórios: Gera relatórios em JSON, PDF, CSV e HTML interativo com gráficos.
+Logs: Suporta logs em arquivo, webhook, email e Syslog (Splunk/ELK).
+GUI: Interface Tkinter com abas para Configurações, Dashboard (gráficos), Resultados e Relatórios interativos.
 
-## Requisitos:
+## Requisitos
 
-Python: Versão 3.11 (padrão em 2025, baixe em python.org).
-Dependências: Instale via pip:
-requests: Para chamadas HTTP.
-beautifulsoup4: Para parsing HTML.
-scapy: Para fingerprinting de SO.
-reportlab: Para relatórios PDF.
-matplotlib: Para gráficos na GUI.
-tkinter: Nativo no Python para GUI.
-sqlmap (opcional): Para testes avançados de SQL Injection.
+Python: 3.11 ou superior.
+Dependências Python:pip install requests beautifulsoup4 scapy reportlab matplotlib msfrpc websocket-client tkinterweb dnspython
 
 
-Sistema Operacional: Windows ou Linux.
-Estrutura do Ambiente: Rede local ou URLs autorizadas (ex.: http://testphp.vulnweb.com, 127.0.0.1).
-Bibliotecas: Rode pip install requests beautifulsoup4 scapy reportlab matplotlib no diretório do script. Instale sqlmap separadamente se necessário (pip install sqlmap ou via repositório GitHub).
-
-## Instalação:
-
-Crie um Repositório no GitHub (opcional para versionamento):
-Vá para github.com e crie um novo repositório chamado "VulnerabilityAnalyzer".
-Clone o repo para o seu PC: git clone https://github.com/hygark/VulnerabilityAnalyzer.git.
-
-
-Adicione o Script:
-Copie o conteúdo de VulnerabilityAnalyzer.py para um arquivo Python no seu diretório.
+## Ferramentas Externas:
+XSStrike: git clone https://github.com/s0md3v/XSStrike.git
+Nikto: sudo apt install nikto (Linux) ou equivalente.
+Wfuzz: pip install wfuzz
+Nuclei: go install -v github.com/projectdiscovery/nuclei/v3@latest
+OWASP ZAP: Instale e configure a API.
+Burp Suite: Configure a API REST.
+Metasploit: Instale e configure o RPC.
 
 
-Instale Dependências:
-No terminal: pip install requests beautifulsoup4 scapy reportlab matplotlib.
-(Opcional) Instale sqlmap: pip install sqlmap ou siga as instruções em sqlmap.org.
+## Sistema Operacional:
+Compatível com Windows e Linux.
+Permissões: Algumas funcionalidades (como varredura de portas) podem requerer privilégios de administrador.
 
+## Instalação
 
+Clone o repositório:
+git clone https://github.com/hygark/VulkAnalyzer.git
+cd VulkAnalyzer
 
-## Configuração no Python:
+Instale as dependências Python:
+pip install -r requirements.txt
 
-Abra o script e edite a tabela Settings:
-Targets: Lista de URLs ou IPs (padrão: ['http://testphp.vulnweb.com', '127.0.0.1']).
-PortRange: Intervalo de portas (padrão: 1-1000).
-Timeout: Timeout por porta (padrão: 0.5 segundos).
-Threads: Número de threads (padrão: 200).
-LogFile: Caminho do arquivo de log (padrão: logs/vulnerability_analyzer.log).
-LogWebhook: URL de um webhook Discord (crie em Discord > Server Settings > Integrations).
-ReportDir: Diretório para relatórios (padrão: reports/).
-CheckSQLi, CheckXSS, CheckCSRF, CheckSSRF, CheckHeaders, CheckCMS, FingerprintOS, ExportJSON, ExportPDF: Habilitar/desabilitar testes/exportações (padrão: True).
+Instale as ferramentas externas conforme as instruções acima.
+Configure os caminhos e chaves de API no script (em Settings ou via GUI).
 
-Ajuste as Configurações:
-Edite Settings ou use a GUI para configurar alvos, portas e testes.
-
-
-Execute o Script:
-No terminal: python VulnerabilityAnalyzer.py.
-Uma janela Tkinter abrirá. Insira alvos (ex.: http://testphp.vulnweb.com,127.0.0.1), intervalo de portas (ex.: 1-1000), selecione testes e clique em "Iniciar Varredura".
-
-
-Teste:
-Varra alvos autorizados (ex.: http://testphp.vulnweb.com para web, 127.0.0.1 para portas).
-O script lista portas abertas, vulnerabilidades (SQLi, XSS, etc.), CMS e SO no console, arquivo de log, GUI e relatórios.
-Monitore logs (ex.: "Potencial XSS em http://testphp.vulnweb.com?q=alert('XSS')").
-Visualize gráficos clicando em "Visualizar Gráficos".
-
-Relatórios:
-Relatórios JSON/PDF são salvos em reports/ com detalhes das vulnerabilidades.
-
-Parar o Script:
-Clique em "Parar Varredura" na GUI ou feche a janela.
+## Crie um diretório para logs e relatórios:
+mkdir logs reports
 
 
 
-## Exemplos de Uso:
+## Uso
 
-Teste Web: Varra http://testphp.vulnweb.com para detectar SQLi, XSS, CSRF, SSRF e cabeçalhos ausentes.
-Teste de Rede: Varra 127.0.0.1 nas portas 1-1000 para encontrar serviços e estimar o SO.
-Relatórios: Gere relatórios JSON/PDF para documentar vulnerabilidades em um servidor autorizado.
-Gráficos: Visualize a distribuição de vulnerabilidades (ex.: SQLi vs. XSS) na GUI.
-Expansão: Adicione testes para vulnerabilidades como LFI/RFI ou integração com outras ferramentas.
+Execute o script:
+python3 VulnerabilityAnalyzer.py
 
-Aviso Legal e Ético:
 
-Este script é para fins educativos e testes em sistemas com permissão explícita. Varredura não autorizada pode violar leis como o Código Penal Brasileiro (art. 154-A), LGPD, ou regulamentos internacionais.
-Sempre obtenha autorização por escrito antes de testar redes/URLs.
-Use em ambientes controlados (ex.: http://testphp.vulnweb.com, redes locais) para pentest ético.
+## Na GUI:
+
+Configurações: Insira alvos (URLs ou IPs), intervalo de portas, caminhos das ferramentas, chaves de API, etc.
+Dashboard: Visualize gráficos de vulnerabilidades em tempo real.
+Resultados: Veja os resultados detalhados das varreduras.
+Relatórios: Exporte relatórios em JSON, PDF, CSV ou HTML interativo.
+Botões: Inicie/parar varreduras, salve configurações, visualize gráficos ou exporte relatórios.
+
+
+Configure logs (arquivo, webhook, email, Syslog) e exportações conforme necessário.
+
+
+Exemplo de Configuração
+Settings = {
+    'Targets': ['http://testphp.vulnweb.com', '127.0.0.1'],
+    'PortRange': (1, 1000),
+    'Threads': 200,
+    'XSStrikePath': './XSStrike/xsstrike.py',
+    'NiktoPath': 'nikto',
+    'SyslogServer': 'localhost',
+    'SyslogPort': 514,
+    'ExportJSON': True,
+    'ExportPDF': True,
+    'ExportCSV': True,
+    'ExportHTML': True
+}
+
+## Conformidade Legal
+
+Aviso: Esta ferramenta é destinada exclusivamente para testes éticos com autorização explícita dos proprietários dos sistemas-alvo. O uso não autorizado pode violar leis locais, como a LGPD (Lei Geral de Proteção de Dados) no Brasil ou outras regulamentações internacionais (ex.: GDPR).
+Responsabilidade: O autor (Hygark) não se responsabiliza por qualquer uso indevido da ferramenta. Certifique-se de obter permissões antes de realizar varreduras.
+
+## Contribuições
+Contribuições são bem-vindas! Envie pull requests ou abra issues no repositório GitHub.
+## Licença
+MIT License. Veja o arquivo LICENSE para mais detalhes.
+
+Contato
+Para dúvidas ou sugestões, contate Hygark via GitHub.
