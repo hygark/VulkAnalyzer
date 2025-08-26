@@ -1,78 +1,92 @@
-# VulkAnalyzer
-apenas um teste, inciante
+# **VulkAnalyzer**
 
-Autor Hygark 
+just a test, beginner
 
-## Funcionalidades
+Author: Hygark
 
-Varredura de Portas: Escaneia portas TCP/UDP em um intervalo configurável com suporte a múltiplas threads.
-Testes Web: Verifica vulnerabilidades como SQL Injection, XSS, CSRF, SSRF, LFI/RFI.
-Detecção de CMS: Identifica sistemas como WordPress, Joomla e Drupal.
-Fingerprinting de SO: Estima o sistema operacional com base no TTL.
-Varredura de Subdomínios: Descobre subdomínios via DNS.
-Testes de APIs: Suporta varreduras em APIs REST, GraphQL e WebSockets, incluindo autenticação fraca e injeções.
-Cloud Misconfigurations: Verifica buckets públicos (AWS S3, Azure Blob, Google Cloud Storage).
-Integrações: Suporta XSStrike, Nikto, Burp Suite, Wfuzz, OWASP ZAP, Metasploit e Nuclei.
-Exportação de Relatórios: Gera relatórios em JSON, PDF, CSV e HTML interativo com gráficos.
-Logs: Suporta logs em arquivo, webhook, email e Syslog (Splunk/ELK).
-GUI: Interface Tkinter com abas para Configurações, Dashboard (gráficos), Resultados e Relatórios interativos.
+## **Features**
 
-## Requisitos
+* **Port Scanning:** Scans TCP/UDP ports within a configurable range with multi-thread support.
+* **Web Testing:** Checks for vulnerabilities such as SQL Injection, XSS, CSRF, SSRF, LFI/RFI.
+* **CMS Detection:** Identifies systems like WordPress, Joomla, and Drupal.
+* **OS Fingerprinting:** Estimates the operating system based on TTL.
+* **Subdomain Scanning:** Discovers subdomains via DNS.
+* **API Testing:** Supports scanning REST, GraphQL, and WebSocket APIs, including weak authentication and injections.
+* **Cloud Misconfigurations:** Detects public buckets (AWS S3, Azure Blob, Google Cloud Storage).
+* **Integrations:** Supports XSStrike, Nikto, Burp Suite, Wfuzz, OWASP ZAP, Metasploit, and Nuclei.
+* **Report Exporting:** Generates reports in JSON, PDF, CSV, and interactive HTML with charts.
+* **Logs:** Supports logging to file, webhook, email, and Syslog (Splunk/ELK).
+* **GUI:** Tkinter interface with tabs for Settings, Dashboard (charts), Results, and interactive Reports.
 
-Python: 3.11 ou superior.
-Dependências Python:pip install requests beautifulsoup4 scapy reportlab matplotlib msfrpc websocket-client tkinterweb dnspython
+## **Requirements**
 
+* **Python:** 3.11 or higher.
+* **Python Dependencies:**
 
-## Ferramentas Externas:
-XSStrike: git clone https://github.com/s0md3v/XSStrike.git
-Nikto: sudo apt install nikto (Linux) ou equivalente.
-Wfuzz: pip install wfuzz
-Nuclei: go install -v github.com/projectdiscovery/nuclei/v3@latest
-OWASP ZAP: Instale e configure a API.
-Burp Suite: Configure a API REST.
-Metasploit: Instale e configure o RPC.
+  ```bash
+  pip install requests beautifulsoup4 scapy reportlab matplotlib msfrpc websocket-client tkinterweb dnspython
+  ```
 
+## **External Tools:**
 
-## Sistema Operacional:
-Compatível com Windows e Linux.
-Permissões: Algumas funcionalidades (como varredura de portas) podem requerer privilégios de administrador.
+* XSStrike: `git clone https://github.com/s0md3v/XSStrike.git`
+* Nikto: `sudo apt install nikto` (Linux) or equivalent.
+* Wfuzz: `pip install wfuzz`
+* Nuclei: `go install -v github.com/projectdiscovery/nuclei/v3@latest`
+* OWASP ZAP: Install and configure the API.
+* Burp Suite: Configure the REST API.
+* Metasploit: Install and configure the RPC.
 
-## Instalação
+## **Operating System**
 
-Clone o repositório:
+* Compatible with Windows and Linux.
+* **Permissions:** Some features (like port scanning) may require administrator privileges.
+
+## **Installation**
+
+Clone the repository:
+
+```bash
 git clone https://github.com/hygark/VulkAnalyzer.git
 cd VulkAnalyzer
+```
 
-Instale as dependências Python:
+Install Python dependencies:
+
+```bash
 pip install -r requirements.txt
+```
 
-Instale as ferramentas externas conforme as instruções acima.
-Configure os caminhos e chaves de API no script (em Settings ou via GUI).
+Install external tools as described above.
+Configure paths and API keys in the script (in **Settings** or via the GUI).
 
-## Crie um diretório para logs e relatórios:
+Create directories for logs and reports:
+
+```bash
 mkdir logs reports
+```
 
+## **Usage**
 
+Run the script:
 
-## Uso
-
-Execute o script:
+```bash
 python3 VulnerabilityAnalyzer.py
+```
 
+### **In the GUI:**
 
-## Na GUI:
+* **Settings:** Input targets (URLs or IPs), port ranges, tool paths, API keys, etc.
+* **Dashboard:** View vulnerability charts in real time.
+* **Results:** Inspect detailed scan results.
+* **Reports:** Export reports in JSON, PDF, CSV, or interactive HTML.
+* **Buttons:** Start/stop scans, save settings, view charts, or export reports.
 
-Configurações: Insira alvos (URLs ou IPs), intervalo de portas, caminhos das ferramentas, chaves de API, etc.
-Dashboard: Visualize gráficos de vulnerabilidades em tempo real.
-Resultados: Veja os resultados detalhados das varreduras.
-Relatórios: Exporte relatórios em JSON, PDF, CSV ou HTML interativo.
-Botões: Inicie/parar varreduras, salve configurações, visualize gráficos ou exporte relatórios.
+Configure logs (file, webhook, email, Syslog) and exports as needed.
 
+### **Example Settings:**
 
-Configure logs (arquivo, webhook, email, Syslog) e exportações conforme necessário.
-
-
-Exemplo de Configuração
+```python
 Settings = {
     'Targets': ['http://testphp.vulnweb.com', '127.0.0.1'],
     'PortRange': (1, 1000),
@@ -86,16 +100,20 @@ Settings = {
     'ExportCSV': True,
     'ExportHTML': True
 }
+```
 
-## Conformidade Legal
+## **Legal Compliance**
 
-Aviso: Esta ferramenta é destinada exclusivamente para testes éticos com autorização explícita dos proprietários dos sistemas-alvo. O uso não autorizado pode violar leis locais, como a LGPD (Lei Geral de Proteção de Dados) no Brasil ou outras regulamentações internacionais (ex.: GDPR).
-Responsabilidade: O autor (Hygark) não se responsabiliza por qualquer uso indevido da ferramenta. Certifique-se de obter permissões antes de realizar varreduras.
+⚠️ **Disclaimer:** This tool is intended **exclusively** for ethical testing with explicit authorization from system owners. Unauthorized use may violate local laws, such as Brazil’s **LGPD (General Data Protection Law)** or international regulations (e.g., GDPR).
+**Responsibility:** The author (Hygark) is not responsible for any misuse of this tool. Always obtain permission before performing scans.
 
-## Contribuições
-Contribuições são bem-vindas! Envie pull requests ou abra issues no repositório GitHub.
-## Licença
-MIT License. Veja o arquivo LICENSE para mais detalhes.
+## **Contributions**
 
-Contato
-Para dúvidas ou sugestões, contate Hygark via GitHub.
+Contributions are welcome! Submit pull requests or open issues in the GitHub repository.
+
+## **License**
+
+MIT License. See the LICENSE file for more details.
+
+**Contact**
+For questions or suggestions, reach out to Hygark via GitHub.
