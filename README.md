@@ -2,7 +2,7 @@
 
 just a test, beginner
 
-Author: Hygark
+
 
 ## **Features**
 
@@ -107,13 +107,3 @@ Settings = {
 ⚠️ **Disclaimer:** This tool is intended **exclusively** for ethical testing with explicit authorization from system owners. Unauthorized use may violate local laws, such as Brazil’s **LGPD (General Data Protection Law)** or international regulations (e.g., GDPR).
 **Responsibility:** The author (Hygark) is not responsible for any misuse of this tool. Always obtain permission before performing scans.
 
-## **Contributions**
-
-Contributions are welcome! Submit pull requests or open issues in the GitHub repository.
-
-## **License**
-
-MIT License. See the LICENSE file for more details.
-
-**Contact**
-For questions or suggestions, reach out to Hygark via GitHub.
